@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LX Academy · Gestão de Conteúdo para Instagram</title>
+<meta name="description" content="Proposta comercial de gestão de conteúdo para o Instagram da LX Academy. Novembro 2026, por Igor Alves.">
+<meta name="theme-color" content="#212121">
+<meta property="og:title" content="Proposta LX Academy · Gestão de Conteúdo para Instagram">
+<meta property="og:description" content="Planos, processo e próximos passos. Novembro 2026.">
+<meta property="og:image" content="assets/hero.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23212121'/><text x='16' y='22' font-family='Arial Black,Arial' font-weight='900' font-size='14' text-anchor='middle' fill='%2305F589'>LX</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  :root {
+    --sc-canvas: #212121;  --sc-surface: #2B2B2B;
+    --sc-ink: #F4F4F0;     --sc-ink-soft: #BDBDB4;
+    --sc-accent: #05F589;  --sc-accent-ink: #1B1B1B;
+    --sc-font-display: "Anton", "Impact", system-ui, sans-serif;
+    --sc-font-text: "Montserrat", system-ui, sans-serif;
+
+    --lx-black: #212121; --lx-black-2: #181818; --lx-grey: #3A3A3A;
+    --lx-green: #05F589; --lx-blue: #0B5CF5; --lx-paper: #F4F4F0;
+    --lx-r: 22px;
+    --lx-gut: clamp(16px, 5.5vw, 96px);
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  html { background: var(--lx-black); }
+  body { font-family: var(--sc-font-text); background: var(--lx-black); color: var(--lx-paper); margin: 0; }
+  ::selection { background: var(--lx-green); color: var(--lx-black); }
+  h1, h2, h3, p, ul { margin: 0; }
+  .d { font-family: var(--sc-font-display); font-weight: 400; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.005em; text-wrap: balance; }
+  .g { color: var(--lx-green); }
+  .b { color: var(--lx-blue); }
+  .eyebrow { font: 800 clamp(0.72rem, 1.1vw, 0.95rem)/1.2 var(--sc-font-text); letter-spacing: 0.16em; text-transform: uppercase; }
+  img { display: block; }
+
+  /* --- themes: hard cuts, each section paints its own ground ----------- */
+  [data-theme="dark"]  { background: var(--lx-black); color: var(--lx-paper); }
+  [data-theme="blue"]  { background: var(--lx-blue);  color: var(--lx-paper); }
+  [data-theme="light"] { background: var(--lx-paper); color: var(--lx-black); }
+  [data-theme="green"] { background: var(--lx-green); color: var(--lx-black); }
+
+  /* --- logo as a mask so it takes any colour --------------------------- */
+  .lx-mark { display: inline-block; aspect-ratio: 393 / 217; background: currentColor;
+    -webkit-mask: url(assets/lx.svg) center / contain no-repeat; mask: url(assets/lx.svg) center / contain no-repeat; }
+
+  /* --- bar --------------------------------------------------------------- */
+  .bar { position: fixed; inset: 0 0 auto 0; z-index: 50; display: flex; align-items: center; justify-content: space-between;
+    padding: 14px var(--lx-gut); padding-top: max(14px, env(safe-area-inset-top)); color: var(--lx-paper); transition: color 200ms var(--ease); pointer-events: none; }
+  .bar > * { pointer-events: auto; }
+  .bar__id { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+  .bar__id .lx-mark { width: 54px; }
+  .bar__by { font: 600 0.78rem/1.2 var(--sc-font-text); opacity: 0.85; white-space: nowrap; }
+  .bar__by b { font-weight: 800; }
+  .btn { --bg: var(--lx-green); --fg: var(--lx-black);
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 20px; border-radius: 12px;
+    background: var(--bg); color: var(--fg); text-decoration: none; white-space: nowrap;
+    font: 400 1.02rem/1 var(--sc-font-display); letter-spacing: 0.04em; text-transform: uppercase;
+    transition: transform 140ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), box-shadow 200ms var(--ease);
+    box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.45); }
+  .btn:active { transform: translateY(1px) scale(0.98); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid var(--lx-green); outline-offset: 3px; }
+  [data-bar="light"] .bar, [data-bar="green"] .bar { color: var(--lx-black); }
+  [data-bar="light"] .bar .btn, [data-bar="green"] .bar .btn { --bg: var(--lx-black); --fg: var(--lx-paper); }
+  [data-bar="light"] .btn:focus-visible, [data-bar="green"] .btn:focus-visible { outline-color: var(--lx-black); }
+  @media (hover: hover) and (pointer: fine) { .btn:hover { box-shadow: 0 10px 26px -10px rgb(0 0 0 / 0.55); filter: brightness(1.06); } }
+  .bar .btn { min-height: 40px; padding: 0 16px; font-size: 0.92rem; }
+  @media (max-width: 560px) { .bar__by { display: none; } .bar .btn { padding: 0 14px; font-size: 0.85rem; } }
+
+  /* --- phone (shared) ---------------------------------------------------- */
+  .phone { position: relative; aspect-ratio: 9 / 19; border-radius: 13% / 6.2%; background: #0b0b0b; padding: 3.2%;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.18) inset, 0 40px 80px -30px rgb(0 0 0 / 0.7), 0 14px 30px -14px rgb(0 0 0 / 0.5); }
+  .phone__screen { position: relative; width: 100%; height: 100%; border-radius: 10.5% / 5%; overflow: hidden; background: #000; }
+  .phone__notch { position: absolute; top: 2.2%; left: 50%; translate: -50% 0; width: 30%; height: 3.4%; border-radius: 99px; background: #0b0b0b; z-index: 4; }
+  .phone video, .phone .phone__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  /* ===================================================================== 1 HERO */
+  .hero .sc-stage, .hero [data-sc-stage] { overflow: clip; }
+  .hero { --k: var(--sc-p, 0); }
+  .h-bg { position: absolute; inset: -6% -4%; will-change: transform;
+    transform: translate3d(0, calc(var(--k) * -5%), 0) scale(calc(1.14 - var(--k) * 0.1)); }
+  .h-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+  .h-shade { position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgb(24 24 24 / 0.94) 0%, rgb(24 24 24 / 0.82) 34%, rgb(24 24 24 / 0.25) 62%, rgb(24 24 24 / 0.05) 100%),
+                linear-gradient(0deg, rgb(24 24 24 / 0.9) 0%, transparent 30%); }
+  .h-copy { position: absolute; left: var(--lx-gut); top: 50%; translate: 0 -46%; z-index: 3; max-width: 64vw; }
+  .h-copy .eyebrow { color: var(--lx-green); margin-bottom: clamp(14px, 2.2vh, 26px); }
+  .h-title { font-size: clamp(3.6rem, 9.4vw, 10.5rem); }
+  .h-title > span { display: block; }
+  /* letter-by-letter entrance: each line is a mask, each letter rises out of it */
+  .js .h-title:not(.is-split) { visibility: hidden; }
+  .h-title .ln { overflow: hidden; padding: 0.16em 0.04em 0.05em; margin: -0.16em -0.04em -0.05em; }
+  .h-title .ch { display: inline-block; opacity: 0; transform: translate3d(0, 108%, 0) rotate(7deg); transform-origin: 0 100%;
+    animation: chIn 620ms var(--ease) forwards; animation-delay: calc(var(--d) * 1ms); }
+  @keyframes chIn { 60% { opacity: 1; } to { opacity: 1; transform: none; } }
+  .js .h-copy .eyebrow { animation: fadeUp 520ms var(--ease) 60ms both; }
+  .js .h-copy .h-sub { animation: fadeUp 620ms var(--ease) 1050ms both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translate3d(0, 12px, 0); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .h-title .ch { animation: none; opacity: 1; transform: none; }
+    .js .h-copy .eyebrow, .js .h-copy .h-sub { animation: none; }
+  }
+  .h-sub { margin-top: clamp(16px, 3vh, 34px); font: 600 clamp(1.05rem, 1.6vw, 1.5rem)/1.3 var(--sc-font-text); }
+  .h-sub small { display: block; font-weight: 500; font-size: 0.7em; opacity: 0.78; margin-top: 4px; }
+  .h-phone { position: absolute; z-index: 4; right: clamp(24px, 13vw, 240px); top: 50%; height: min(76svh, 700px);
+    transform: translate3d(0, calc(-50% + (0.5 - var(--k)) * 16vh), 0) rotate(calc(5deg - var(--k) * 7deg)); will-change: transform; }
+  .h-phone .phone { height: 100%; }
+  .h-tile { position: absolute; z-index: 5; width: clamp(110px, 11vw, 180px); aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 24px 50px -20px rgb(0 0 0 / 0.75); border: 3px solid var(--lx-paper); will-change: transform; }
+  .h-tile img { width: 100%; height: 100%; object-fit: cover; }
+  .h-tile--a { right: clamp(8px, 4vw, 70px); bottom: 9vh; transform: translate3d(0, calc((0.5 - var(--k)) * 40vh), 0) rotate(8deg); }
+  .h-tile--b { right: calc(clamp(24px, 13vw, 240px) + min(36svh, 330px)); top: 12vh; width: clamp(90px, 8vw, 140px);
+    transform: translate3d(0, calc((0.5 - var(--k)) * 30vh), 0) rotate(-9deg); }
+  .h-chip { position: absolute; z-index: 6; left: 50%; bottom: 7%; translate: -50% 0; background: var(--lx-green); color: var(--lx-black);
+    font: 800 0.72rem/1 var(--sc-font-text); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; border-radius: 99px; white-space: nowrap; }
+  /* tablet / small laptop: give the headline its own column so the phone never covers it */
+  @media (min-width: 861px) and (max-width: 1240px) {
+    .h-title { font-size: 7.4vw; }
+    .h-copy { max-width: 56vw; }
+    .h-phone { right: 5vw; height: min(70svh, 640px); }
+    .h-tile--b { right: calc(5vw + min(33svh, 300px)); }
+  }
+  @media (max-width: 860px) {
+    .h-copy .eyebrow { font-size: 0.66rem; letter-spacing: 0.1em; }
+    .h-copy { top: calc(76px + env(safe-area-inset-top)); translate: none; max-width: none; right: var(--lx-gut); }
+    .h-title { font-size: min(14.2vw, 5.6rem); }
+    .h-sub { margin-top: 14px; font-size: 1rem; }
+    .h-shade { background: linear-gradient(180deg, rgb(24 24 24 / 0.95) 0%, rgb(24 24 24 / 0.86) 40%, rgb(24 24 24 / 0.2) 70%, rgb(24 24 24 / 0.55) 100%); }
+    .h-phone { right: auto; left: 50%; top: auto; bottom: -4svh; height: min(54svh, 120vw);
+      transform: translate3d(-50%, calc((0.5 - var(--k)) * 10svh), 0) rotate(calc(3deg - var(--k) * 4deg)); }
+    .h-tile--a { width: 96px; right: 14px; bottom: 16svh; }
+    .h-tile--b { width: 82px; left: 14px; right: auto; top: auto; bottom: 8svh; }
+  }
+  @media (max-width: 860px) and (max-height: 700px) { .h-phone { height: 46svh; } .h-tile--b { display: none; } }
+
+  /* ===================================================================== 2 BASE */
+  .base { min-height: 100svh; display: grid; align-content: space-between; gap: 8vh; padding: calc(96px + 6vh) var(--lx-gut) 10vh; box-sizing: border-box; overflow: hidden; }
+  .base__title { font-size: clamp(3rem, 7.4vw, 8rem); }
+  .base__row { display: flex; align-items: flex-end; gap: clamp(20px, 4vw, 64px); flex-wrap: wrap; }
+  .base__num { font: 400 clamp(9rem, 27vw, 26rem)/0.78 var(--sc-font-display); color: var(--lx-green); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .base__txt { max-width: 30ch; font: 600 clamp(1.1rem, 1.9vw, 1.75rem)/1.35 var(--sc-font-text); padding-bottom: 0.6em; }
+  .base__txt b { font-weight: 800; }
+
+  /* ===================================================================== 3 CONTEÚDO (deck) */
+  .deck-act { --k: clamp(0, calc((var(--sc-p, 0) - 0.08) / 0.5), 1); }
+  .deck-stage { display: grid; grid-template-rows: auto 1fr; padding: calc(96px + 3vh) var(--lx-gut) 6vh; box-sizing: border-box; }
+  .deck-head h2 { font-size: clamp(2.8rem, 6.6vw, 7rem); }
+  .deck-head p { margin-top: 18px; max-width: 46ch; font: 500 clamp(1rem, 1.45vw, 1.3rem)/1.5 var(--sc-font-text); color: #3b3b37; }
+  .deck { position: relative; }
+  .card { position: absolute; left: 50%; top: 52%; width: min(30vw, 25rem); min-height: 15rem; box-sizing: border-box;
+    padding: clamp(22px, 2.2vw, 34px); border-radius: var(--lx-r); display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
+    --dx: calc((var(--i) - 1) * (min(30vw, 25rem) + 1.6vw)); --dy: calc(var(--lift, 0) * 1rem);
+    transform: translate3d(calc(-50% + var(--dx) * var(--k)), calc(-50% + var(--i) * -10px * (1 - var(--k)) + var(--dy) * var(--k)), 0)
+               rotate(calc((var(--i) - 1) * 7deg * (1 - var(--k))));
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.25) inset, 0 30px 50px -28px rgb(33 33 33 / 0.55); will-change: transform; }
+  .card h3 { font: 400 clamp(2rem, 3vw, 3rem)/0.95 var(--sc-font-display); text-transform: uppercase; }
+  .card p { font: 500 clamp(0.98rem, 1.2vw, 1.12rem)/1.45 var(--sc-font-text); }
+  .card__ico { width: 44px; height: 44px; margin-bottom: auto; }
+  .card--blue  { background: var(--lx-blue); color: var(--lx-paper); z-index: 3; }
+  .card--green { background: var(--lx-green); color: var(--lx-black); z-index: 2; }
+  .card--dark  { background: var(--lx-black); color: var(--lx-paper); z-index: 1; }
+  @media (max-width: 860px) {
+    .deck-stage { padding-top: calc(84px + 1vh); }
+    .deck-head h2 { font-size: min(12.5vw, 4rem); }
+    .deck-head p { font-size: 0.95rem; margin-top: 10px; }
+    .card { width: calc(100vw - 2 * var(--lx-gut)); min-height: 0; height: min(19svh, 170px); top: 50%; padding: 18px 20px; gap: 6px;
+      --dx: 0px; --dy: calc((var(--i) - 1) * (min(19svh, 170px) + 12px)); }
+    .card__ico { display: none; }
+    .card h3 { font-size: 1.75rem; }
+    .card p { font-size: 0.92rem; line-height: 1.4; }
+  }
+
+  /* ===================================================================== 4 COMO FUNCIONA (rail) */
+  .how .sc-stage, .how [data-sc-stage] { display: flex; align-items: center; }
+  .rail { display: flex; align-items: stretch; gap: clamp(14px, 1.6vw, 24px); padding-inline: var(--lx-gut); will-change: transform; }
+  .rail__lead { flex: 0 0 auto; width: clamp(16rem, 34vw, 34rem); display: flex; flex-direction: column; justify-content: center; padding-right: 2vw; }
+  .rail__lead h2 { font-size: clamp(3rem, 7vw, 7.5rem); }
+  .rail__lead p { margin-top: 18px; font: 500 clamp(1rem, 1.3vw, 1.2rem)/1.5 var(--sc-font-text); color: var(--sc-ink-soft); max-width: 30ch; }
+  .step { --s: clamp(0, calc(var(--sc-p, 0) * 5.2 - var(--n) + 1.4), 1);
+    flex: 0 0 auto; width: clamp(17rem, 27vw, 25rem); min-height: min(58svh, 30rem); box-sizing: border-box; border-radius: var(--lx-r);
+    padding: clamp(24px, 2.4vw, 36px); display: flex; flex-direction: column; gap: 12px;
+    opacity: calc(0.5 + var(--s) * 0.5); transform: translate3d(0, calc((1 - var(--s)) * 28px), 0) scale(calc(0.96 + var(--s) * 0.04)); }
+  .step__n { font: 400 clamp(3.6rem, 5vw, 5.4rem)/0.9 var(--sc-font-display); }
+  .step h3 { font: 400 clamp(1.9rem, 2.5vw, 2.6rem)/0.95 var(--sc-font-display); text-transform: uppercase; margin-top: auto; }
+  .step p { font: 500 clamp(0.98rem, 1.15vw, 1.1rem)/1.5 var(--sc-font-text); }
+  .step--blue { background: var(--lx-blue); color: var(--lx-paper); }
+  .step--paper { background: var(--lx-paper); color: var(--lx-black); }
+  .step--green { background: var(--lx-green); color: var(--lx-black); }
+  .step--grey { background: var(--lx-grey); color: var(--lx-paper); }
+  .rail__note { flex: 0 0 auto; width: clamp(15rem, 26vw, 24rem); display: flex; flex-direction: column; justify-content: center; gap: 18px; padding-left: 2vw; }
+  .rail__note p { font: 400 clamp(2rem, 3.4vw, 3.4rem)/0.98 var(--sc-font-display); text-transform: uppercase; }
+  .how__track { position: absolute; left: var(--lx-gut); right: var(--lx-gut); bottom: 7svh; height: 4px; border-radius: 4px; background: rgb(244 244 240 / 0.12); overflow: hidden; }
+  .how__track i { position: absolute; inset: 0; background: var(--lx-green); transform-origin: 0 50%; transform: scaleX(var(--sc-p, 0)); }
+  @media (max-width: 860px) {
+    .rail__lead { width: 78vw; }
+    .rail__lead h2 { font-size: min(15vw, 4.4rem); }
+    .step { width: 76vw; min-height: 52svh; }
+    .rail__note { width: 70vw; }
+  }
+
+  /* ===================================================================== 5 PICO: o perfil enche */
+  .feed-stage { display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: center; gap: 4vw; padding: 84px var(--lx-gut) 3vh; box-sizing: border-box; }
+  .plans-copy { position: relative; }
+  .plans-copy > .eyebrow { color: #55554f; margin-bottom: 16px; }
+  .plans-copy h2 { font-size: clamp(2.6rem, 5.6vw, 6rem); margin-bottom: clamp(18px, 4vh, 40px); }
+  /* all three states share one grid cell, so the block is as tall as the longest one and never overlaps the buttons */
+  .pstates { display: grid; }
+  .pstate { grid-area: 1 / 1; opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity 340ms var(--ease), transform 420ms var(--ease); pointer-events: none; }
+  .pstate.is-on { opacity: 1; transform: none; pointer-events: auto; }
+  .pstate__tag { font: 800 0.86rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--lx-blue); }
+  .pstate__name { font: 400 clamp(2.4rem, 4vw, 4.2rem)/0.95 var(--sc-font-display); text-transform: uppercase; margin-top: 8px; }
+  .pstate__price { font: 400 clamp(4rem, 8vw, 8.5rem)/0.9 var(--sc-font-display); color: var(--lx-blue); font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .pstate__price small { font: 700 1rem/1 var(--sc-font-text); color: #55554f; letter-spacing: 0; margin-left: 8px; }
+  .pstate__sum { margin-top: 14px; font: 600 clamp(1rem, 1.3vw, 1.2rem)/1.45 var(--sc-font-text); color: #33332f; }
+  .psel { display: flex; gap: 8px; margin-top: clamp(16px, 3vh, 32px); flex-wrap: wrap; }
+  .psel button { font: 700 0.86rem/1 var(--sc-font-text); padding: 12px 16px; min-height: 44px; border-radius: 99px; border: 2px solid var(--lx-black); background: transparent; color: var(--lx-black); cursor: pointer;
+    transition: background-color 180ms var(--ease), color 180ms var(--ease), transform 140ms var(--ease); }
+  .psel button:active { transform: scale(0.97); }
+  .psel button.is-on { background: var(--lx-black); color: var(--lx-paper); }
+  .feed-phone { justify-self: center; height: min(80svh, 740px); position: relative; }
+  .feed-phone .phone { height: 100%; }
+  .ig { position: absolute; inset: 0; background: #0c0c0c; color: #f5f5f5; display: flex; flex-direction: column; font-family: var(--sc-font-text); }
+  .ig__top { padding: 13% 6% 0; display: flex; align-items: center; justify-content: space-between; font: 700 clamp(0.7rem, 1.6svh, 0.95rem)/1 var(--sc-font-text); }
+  .ig__head { display: flex; align-items: center; gap: 6%; padding: 5% 6% 3%; }
+  .ig__ava { flex: 0 0 22%; aspect-ratio: 1; border-radius: 50%; background: var(--lx-black); display: grid; place-items: center; color: var(--lx-paper);
+    box-shadow: 0 0 0 2px #0c0c0c, 0 0 0 4px var(--lx-green); }
+  .ig__ava .lx-mark { width: 70%; }
+  .ig__stats { display: flex; gap: 10%; flex: 1; }
+  .ig__stats div { display: grid; gap: 2px; }
+  .ig__stats b { font: 800 clamp(0.85rem, 2.1svh, 1.2rem)/1 var(--sc-font-text); font-variant-numeric: tabular-nums; }
+  .ig__stats span { font: 500 clamp(0.55rem, 1.25svh, 0.72rem)/1.15 var(--sc-font-text); opacity: 0.75; }
+  .ig__bio { padding: 0 6% 4%; font: 500 clamp(0.58rem, 1.35svh, 0.78rem)/1.35 var(--sc-font-text); }
+  .ig__bio b { display: block; font-weight: 800; }
+  .ig__tabs { display: flex; border-top: 1px solid #262626; }
+  .ig__tabs span { flex: 1; display: grid; place-items: center; padding: 3% 0; opacity: 0.5; }
+  .ig__tabs span:first-child { opacity: 1; box-shadow: inset 0 -1.5px 0 #f5f5f5; }
+  .ig__tabs svg { width: 16px; height: 16px; }
+  .ig__gridwrap { position: relative; flex: 1; overflow: hidden; }
+  .ig__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; transition: transform 520ms var(--ease); will-change: transform; }
+  .tile { position: relative; aspect-ratio: 3 / 4; background: #1a1a1a; overflow: hidden; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.12); transition: opacity 260ms var(--ease), transform 420ms var(--ease); }
+  .tile.on img { opacity: 1; transform: none; }
+  .tile svg { position: absolute; top: 6%; right: 6%; width: 16%; height: auto; color: #fff; opacity: 0; transition: opacity 260ms var(--ease); filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.6)); }
+  .tile.on svg { opacity: 1; }
+  .tile.new::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 2px var(--lx-green); animation: flash 700ms var(--ease) forwards; }
+  @keyframes flash { from { opacity: 1; } to { opacity: 0; } }
+  .ig__empty { position: absolute; inset: 8% 0 auto; text-align: center; font: 600 0.78rem/1.4 var(--sc-font-text); opacity: 0.55; transition: opacity 200ms; }
+  .feed-badge { position: absolute; z-index: 3; left: -14%; bottom: 14%; background: var(--lx-green); color: var(--lx-black); border-radius: 16px; padding: 12px 16px;
+    box-shadow: 0 20px 40px -18px rgb(33 33 33 / 0.6); font: 700 0.82rem/1.25 var(--sc-font-text); }
+  .feed-badge b { display: block; font: 400 2.1rem/1 var(--sc-font-display); font-variant-numeric: tabular-nums; }
+  @media (max-width: 860px) {
+    .feed-stage { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-items: start; gap: 2svh; padding-top: calc(72px + 1svh); padding-bottom: 2svh; }
+    .plans-copy > .eyebrow { display: none; }
+    .plans-copy h2 { font-size: min(11vw, 3rem); margin-bottom: 14px; }
+    .pstate__name { font-size: 1.6rem; margin-top: 4px; }
+    .pstate__price { font-size: 3.2rem; }
+    .pstate__sum { font-size: 0.86rem; margin-top: 6px; }
+    .psel { gap: 6px; margin-top: 12px; }
+    .psel button { font-size: 0.74rem; padding: 0 12px; min-height: 40px; }
+    .feed-phone { height: 100%; max-height: 52svh; align-self: center; }
+    .feed-badge { left: auto; right: -40%; bottom: 10%; padding: 8px 10px; font-size: 0.68rem; border-radius: 12px; }
+    .feed-badge b { font-size: 1.5rem; }
+  }
+  @media (max-width: 400px) { .feed-badge { right: -34%; } }
+
+  /* ===================================================================== 6 PLANOS (detalhe) */
+  .plans { padding: clamp(40px, 8vh, 100px) var(--lx-gut) clamp(70px, 12vh, 140px); }
+  .plans__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(28px, 6vh, 64px); }
+  .plans__head h2 { font-size: clamp(2.8rem, 6.4vw, 7rem); }
+  .plans__head p { font: 600 0.95rem/1.5 var(--sc-font-text); color: #4a4a45; max-width: 36ch; }
+  .plans__grid { display: grid; grid-template-columns: 1fr 1.12fr 1fr; gap: clamp(14px, 1.4vw, 22px); align-items: start; }
+  .plan { border-radius: var(--lx-r); padding: clamp(24px, 2.4vw, 36px); display: flex; flex-direction: column; gap: 6px; min-height: 100%; box-sizing: border-box;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.2) inset, 0 30px 50px -30px rgb(33 33 33 / 0.6); }
+  .plan--dark { background: var(--lx-black); color: var(--lx-paper); }
+  .plan--blue { background: var(--lx-blue); color: var(--lx-paper); padding-bottom: calc(clamp(24px, 2.4vw, 36px) + 1.4rem); }
+  .plan-wrap { perspective: 1000px; display: flex; }
+  .plan-wrap > .plan { flex: 1; }
+  .plan-wrap--lift { margin-top: -1.4rem; }
+  .plan { position: relative; }
+  .plan__glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 300ms var(--ease);
+    background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgb(255 255 255 / 0.26), rgb(255 255 255 / 0) 55%); }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .plan { transform-style: preserve-3d; will-change: transform;
+      transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateZ(0);
+      box-shadow: 0 1px 0 rgb(255 255 255 / 0.2) inset, var(--sx, 0px) var(--sy, 30px) 50px -28px rgb(33 33 33 / 0.6);
+      transition: transform 450ms var(--ease), box-shadow 450ms var(--ease); }
+    .plan.inclinando { transition-duration: 90ms; }
+    .plan.inclinando .plan__glare { opacity: 1; }
+    .plan h3, .plan .plan__price { transform: translateZ(34px); }
+    .plan .plan__tag, .plan ul { transform: translateZ(18px); }
+    .plan .btn { transform: translateZ(26px); }
+    .plan .btn:active { transform: translateZ(26px) translateY(1px) scale(0.98); }
+  }
+  .plan--green { background: var(--lx-green); color: var(--lx-black); }
+  .plan__tag { font: 800 0.8rem/1 var(--sc-font-text); letter-spacing: 0.14em; text-transform: uppercase; }
+  .plan--dark .plan__tag { color: var(--lx-green); }
+  .plan h3 { font: 400 clamp(2.2rem, 3.2vw, 3.2rem)/0.95 var(--sc-font-display); text-transform: uppercase; margin-top: 8px; }
+  .plan__price { font: 400 clamp(3rem, 4.6vw, 4.8rem)/1 var(--sc-font-display); font-variant-numeric: tabular-nums; }
+  .plan--dark .plan__price, .plan--blue .plan__price { color: var(--lx-green); }
+  .plan__price small { font: 700 0.9rem/1 var(--sc-font-text); opacity: 0.8; margin-left: 6px; }
+  .plan ul { list-style: none; padding: 0; margin: 14px 0 22px; display: grid; gap: 9px; font: 600 clamp(0.95rem, 1.1vw, 1.05rem)/1.4 var(--sc-font-text); }
+  .plan li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; align-items: start; }
+  .plan li::before { content: ""; width: 14px; height: 14px; margin-top: 3px; border-radius: 50%; background: currentColor; opacity: 0.9;
+    -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / contain no-repeat;
+            mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/></svg>") center / contain no-repeat; border-radius: 0; }
+  .plan .btn { margin-top: auto; width: 100%; box-sizing: border-box; }
+  .plan--dark .btn { --bg: var(--lx-green); --fg: var(--lx-black); }
+  .plan--blue .btn { --bg: var(--lx-paper); --fg: var(--lx-blue); }
+  .plan--green .btn { --bg: var(--lx-black); --fg: var(--lx-paper); }
+  .plans__foot { margin-top: 26px; font: 600 0.9rem/1.5 var(--sc-font-text); color: #4a4a45; }
+  @media (max-width: 960px) { .plans__grid { grid-template-columns: 1fr; } .plan-wrap--lift { margin-top: 0; } .plan--blue { padding-bottom: clamp(24px, 2.4vw, 36px); } }
+
+  /* ===================================================================== 7 ADICIONAIS */
+  .extras { padding: clamp(70px, 14vh, 150px) var(--lx-gut); }
+  .extras h2 { font-size: clamp(2.8rem, 6.4vw, 7rem); margin-bottom: clamp(28px, 6vh, 60px); }
+  .extras__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(14px, 1.4vw, 22px); }
+  .xcard { border-radius: var(--lx-r); overflow: hidden; display: flex; flex-direction: column; }
+  .xcard--blue { background: var(--lx-blue); color: var(--lx-paper); }
+  .xcard--paper { background: var(--lx-paper); color: var(--lx-black); }
+  .xcard__img { height: clamp(150px, 24vh, 240px); overflow: hidden; }
+  .xcard__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+  .xcard__body { padding: clamp(24px, 2.4vw, 38px); display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .xcard h3 { font: 400 clamp(2.2rem, 3.4vw, 3.4rem)/0.95 var(--sc-font-display); text-transform: uppercase; }
+  .xcard p { font: 500 clamp(0.98rem, 1.2vw, 1.15rem)/1.5 var(--sc-font-text); max-width: 46ch; }
+  .xopts { display: flex; gap: clamp(20px, 4vw, 56px); flex-wrap: wrap; margin-top: auto; padding-top: 14px; }
+  .xopts span { display: block; font: 700 0.92rem/1.2 var(--sc-font-text); }
+  .xopts b { display: block; font: 400 clamp(2.6rem, 3.8vw, 3.8rem)/1 var(--sc-font-display); color: var(--lx-green); font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .xcard--paper .xprice { margin-top: auto; font: 400 clamp(2.8rem, 4.2vw, 4.4rem)/1 var(--sc-font-display); color: var(--lx-blue); }
+  .extras__foot { margin-top: 22px; font: 600 0.9rem/1.5 var(--sc-font-text); color: var(--sc-ink-soft); }
+  @media (max-width: 860px) { .extras__grid { grid-template-columns: 1fr; } }
+
+  /* ===================================================================== 8 QUEM PRODUZ */
+  .who { padding: clamp(40px, 7vh, 72px) var(--lx-gut); display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 40px; border-top: 2px solid rgb(33 33 33 / 0.1); }
+  .who .eyebrow { color: var(--lx-blue); font-size: 0.72rem; }
+  .who h2 { font-size: clamp(1.9rem, 3vw, 2.8rem); margin-top: 8px; }
+  .who__role { font: 700 0.95rem/1.3 var(--sc-font-text); margin-top: 4px; }
+  .who p { font: 500 0.98rem/1.55 var(--sc-font-text); color: #3b3b37; max-width: 40ch; }
+  .link { display: inline-flex; align-items: center; gap: 10px; margin-top: 12px; color: var(--lx-black); text-decoration: none;
+    font: 400 1.2rem/1 var(--sc-font-display); text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 3px solid var(--lx-blue); padding-bottom: 6px; min-height: 32px; }
+  .link svg { width: 18px; height: 18px; transition: transform 160ms var(--ease); }
+  @media (hover: hover) and (pointer: fine) { .link:hover svg { transform: translate(3px, -3px); } }
+
+  /* ===================================================================== 9 PRÓXIMOS PASSOS */
+  .close-stage { display: grid; grid-template-rows: 1fr auto; padding: 90px var(--lx-gut) 0; box-sizing: border-box; }
+  .close__main { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; align-items: center; }
+  .close__title { font-size: clamp(4rem, 11vw, 12.5rem); line-height: 0.86; }
+  .ncard { background: var(--lx-black); color: var(--lx-paper); border-radius: 26px; padding: clamp(24px, 2.8vw, 42px); box-shadow: 0 40px 70px -40px rgb(0 0 0 / 0.7); }
+  .ncard > p { font: 400 clamp(1.05rem, 1.5vw, 1.4rem)/1.4 var(--sc-font-text); }
+  .ncard > p b { font-weight: 800; }
+  .nlist { list-style: none; padding: 0; margin: 18px 0 22px; display: grid; gap: 12px; font: 500 clamp(0.98rem, 1.25vw, 1.15rem)/1.35 var(--sc-font-text); }
+  .nlist li { display: grid; grid-template-columns: 26px 1fr; gap: 12px; align-items: center; }
+  .chk { position: relative; width: 24px; height: 24px; border-radius: 50%; box-shadow: inset 0 0 0 2px rgb(244 244 240 / 0.4); }
+  .chk i { position: absolute; inset: 0; border-radius: 50%; background: var(--lx-green); display: grid; place-items: center; }
+  .chk i svg { width: 14px; height: 14px; }
+  .ncard__go { font: 800 clamp(1.02rem, 1.4vw, 1.3rem)/1.35 var(--sc-font-text); margin-bottom: 20px; }
+  .ncard .btn { width: 100%; box-sizing: border-box; min-height: 64px; font-size: clamp(1.2rem, 1.8vw, 1.6rem); border-radius: 14px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding: 22px 0 max(22px, env(safe-area-inset-bottom)); border-top: 2px solid rgb(33 33 33 / 0.18); margin-top: 3vh;
+    font: 600 0.82rem/1.4 var(--sc-font-text); }
+  .foot .lx-mark { width: 50px; }
+  .foot a { color: inherit; }
+  @media (max-width: 860px) {
+    .close-stage { padding-top: calc(70px + 1svh); }
+    .close__main { grid-template-columns: 1fr; gap: 2.2svh; align-content: center; }
+    .close__title { font-size: min(19vw, 6rem); }
+    .ncard { padding: 20px; border-radius: 20px; }
+    .nlist { margin: 12px 0 14px; gap: 8px; font-size: 0.92rem; }
+    .ncard > p { font-size: 1rem; }
+    .ncard__go { font-size: 0.98rem; margin-bottom: 14px; }
+    .ncard .btn { min-height: 54px; }
+    .foot { padding-top: 12px; margin-top: 1svh; font-size: 0.72rem; }
+    .foot .lx-mark { width: 40px; }
+  }
+  @media (max-width: 860px) and (max-height: 720px) { .nlist { display: none; } }
+
+  /* ----------------------------------------------------------- reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero, .deck-act { --k: 1; }
+    .h-bg, .h-phone, .h-tile { transform: none !important; }
+    .h-phone { translate: 0 -50%; }
+    @media (max-width: 860px) { .h-phone { translate: -50% 0; } }
+    .step { --s: 1; }
+    .tile img, .pstate { transition-duration: 1ms; }
+  }
+</style>
+</head>
+<body data-bar="dark">
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="bar">
+  <a class="bar__id" href="#top" aria-label="LX Academy, voltar ao início">
+    <span class="lx-mark" aria-hidden="true"></span>
+    <span class="bar__by">Proposta por <b>Igor Alves</b></span>
+  </a>
+  <a class="btn js-wa" href="https://wa.me/5511994577549" target="_blank" rel="noopener">Agendar conversa</a>
+</header>
+
+<main id="top">
+
+  <!-- 1 · CAPA: pinned layered hero, --sc-p drives five planes -->
+  <section class="hero" data-theme="dark" data-sc-act="pin" data-sc-span="1.9">
+    <div data-sc-stage>
+      <div class="h-bg" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 860px)" srcset="assets/hero-m.webp">
+          <img src="assets/hero.webp" alt="" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="h-shade" aria-hidden="true"></div>
+      <div class="h-copy">
+        <p class="eyebrow">Proposta comercial · Novembro 2026</p>
+        <h1 class="d h-title"><span>Gestão de</span> <span>conteúdo para</span> <span class="g">Instagram</span></h1>
+        <p class="h-sub">LX Academy<small>Centro de treinamento de alta performance</small></p>
+      </div>
+      <div class="h-tile h-tile--b" aria-hidden="true"><img src="assets/grid/r7.jpg" alt=""></div>
+      <div class="h-phone">
+        <div class="phone">
+          <div class="phone__screen">
+            <img class="phone__poster" src="assets/reel-poster.jpg" alt="">
+            <video class="js-reel" src="assets/reel.mp4" poster="assets/reel-poster.jpg" muted loop playsinline autoplay preload="auto" aria-label="Reel de exemplo da LX Academy: alunos treinando na academia"></video>
+          </div>
+          <span class="phone__notch" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="h-tile h-tile--a" aria-hidden="true"><img src="assets/grid/r3.jpg" alt=""></div>
+    </div>
+  </section>
+
+  <!-- 2 · BASE REAL: flow, hard cut to blue, the one real number -->
+  <section class="base" data-theme="blue">
+    <h2 class="d base__title" data-sc-in>Uma base real<br>para crescer</h2>
+    <div class="base__row sc-stack" data-sc-in data-sc-stagger="80">
+      <p class="base__num" aria-label="840"><span data-sc-count="0 840" data-sc-count-ms="1500">840</span></p>
+      <p class="base__txt">seguidores construídos até aqui. Com a <b>LX Academy</b> em um novo momento, o Instagram passa a ser o próximo investimento.</p>
+    </div>
+  </section>
+
+  <!-- 3 · CONTEÚDO PROFISSIONAL: pinned deck that deals itself out -->
+  <section class="deck-act" data-theme="light" data-sc-act="pin" data-sc-span="2.4">
+    <div data-sc-stage class="deck-stage">
+      <div class="deck-head">
+        <h2 class="d">Conteúdo <span class="b">profissional</span></h2>
+        <p>Vídeos e posts com a identidade visual da LX Academy, pensados para mostrar treinos, resultados e a rotina dos alunos.</p>
+      </div>
+      <div class="deck">
+        <article class="card card--blue" style="--i:0">
+          <svg class="card__ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="10" width="36" height="28" rx="5"/><path d="M20 18l10 6-10 6z" fill="currentColor"/></svg>
+          <h3>Acabamento</h3>
+          <p>Cortes, ritmo e textos na tela com cara de produção profissional.</p>
+        </article>
+        <article class="card card--green" style="--i:1;--lift:-1.6">
+          <svg class="card__ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="10" width="34" height="31" rx="5"/><path d="M7 19h34M16 6v8M32 6v8M15 27h4M22 27h4M29 27h4M15 34h4M22 34h4"/></svg>
+          <h3>Constância</h3>
+          <p>Calendário fixo de postagens, para o perfil nunca ficar parado.</p>
+        </article>
+        <article class="card card--dark" style="--i:2">
+          <svg class="card__ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 38V26M24 38V16M38 38V8"/></svg>
+          <h3>Planos flexíveis</h3>
+          <p>Três opções de volume, com captação inclusa nos planos maiores, para caber no investimento.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · COMO FUNCIONA: lateral rail, a line draws under it -->
+  <section class="how" data-theme="dark" data-sc-act="pan" data-sc-span="4.6">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.04">
+        <div class="rail__lead">
+          <h2 class="d">Como <span class="g">funciona</span></h2>
+          <p>Quatro etapas, todo mês, do bruto ao relatório.</p>
+        </div>
+        <article class="step step--blue" style="--n:1"><span class="step__n">01</span><h3>Gravação</h3><p>Captação inclusa no Crescimento e no Completo. No Essencial, a academia grava ou contrata à parte.</p></article>
+        <article class="step step--paper" style="--n:2"><span class="step__n">02</span><h3>Edição</h3><p>Reels editados com a identidade visual da LX Academy.</p></article>
+        <article class="step step--green" style="--n:3"><span class="step__n">03</span><h3>Publicação</h3><p>Postagem no feed e organização do perfil, com calendário mensal e roteiros de vídeo.</p></article>
+        <article class="step step--grey" style="--n:4"><span class="step__n">04</span><h3>Relatório</h3><p>Resumo mensal em linguagem simples, com próximos passos.</p></article>
+        <div class="rail__note"><p>E o ciclo <span class="g">recomeça</span> no mês seguinte.</p></div>
+      </div>
+      <div class="how__track" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <!-- 5 · PICO: the LX profile fills up, plan by plan (signature move) -->
+  <section id="planos" class="feed-act" data-theme="light" data-sc-act="pin" data-sc-span="4.4">
+    <div data-sc-stage class="feed-stage">
+      <div class="plans-copy">
+        <p class="eyebrow">Planos mensais</p>
+        <h2 class="d">Veja o perfil <span class="b">ganhar volume</span></h2>
+        <div class="pstates" aria-live="polite">
+          <div class="pstate is-on" data-state="0">
+            <p class="pstate__tag">Para começar</p>
+            <p class="pstate__name">Essencial</p>
+            <p class="pstate__price">R$ 990<small>/mês</small></p>
+            <p class="pstate__sum">5 Reels editados · Publicação no feed</p>
+          </div>
+          <div class="pstate" data-state="1">
+            <p class="pstate__tag">Equilíbrio</p>
+            <p class="pstate__name">Crescimento</p>
+            <p class="pstate__price">R$ 2.290<small>/mês</small></p>
+            <p class="pstate__sum">8 Reels editados · 4 posts ou carrosséis · Captação parcial inclusa (4h)</p>
+          </div>
+          <div class="pstate" data-state="2">
+            <p class="pstate__tag">Melhor valor por peça</p>
+            <p class="pstate__name">Completo</p>
+            <p class="pstate__price">R$ 3.290<small>/mês</small></p>
+            <p class="pstate__sum">12 Reels editados · 8 posts ou carrosséis · Captação parcial inclusa (6h)</p>
+          </div>
+        </div>
+        <div class="psel" role="group" aria-label="Ver plano">
+          <button type="button" class="is-on" data-go="0">Essencial</button>
+          <button type="button" data-go="1">Crescimento</button>
+          <button type="button" data-go="2">Completo</button>
+        </div>
+      </div>
+
+      <div class="feed-phone">
+        <div class="phone">
+          <div class="phone__screen">
+            <div class="ig">
+              <div class="ig__top"><span>LX Academy</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div>
+              <div class="ig__head">
+                <div class="ig__ava"><span class="lx-mark" aria-hidden="true"></span></div>
+                <div class="ig__stats">
+                  <div><b class="js-n">0</b><span>peças<br>no mês</span></div>
+                  <div><b>840</b><span>seguidores</span></div>
+                </div>
+              </div>
+              <p class="ig__bio"><b>LX Academy</b>Centro de treinamento de alta performance</p>
+              <div class="ig__tabs" aria-hidden="true">
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg></span>
+                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8.5l5 3.5-5 3.5z" fill="currentColor"/></svg></span>
+              </div>
+              <div class="ig__gridwrap">
+                <p class="ig__empty js-empty">O mês começa aqui</p>
+                <div class="ig__grid js-grid" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+          <span class="phone__notch" aria-hidden="true"></span>
+        </div>
+        <div class="feed-badge" aria-hidden="true"><b class="js-reels">0</b>reels no mês</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · ESCOLHA: the three plans in full, flow -->
+  <section class="plans" data-theme="light" id="escolha">
+    <div class="plans__head" data-sc-in>
+      <h2 class="d">Planos <span class="b">mensais</span></h2>
+      <p>Cada botão abre o WhatsApp com o plano já escrito na mensagem.</p>
+    </div>
+    <div class="plans__grid sc-stack" data-sc-in data-sc-stagger="80">
+      <div class="plan-wrap"><article class="plan plan--dark" data-tilt3d><span class="plan__glare" aria-hidden="true"></span>
+        <p class="plan__tag">Para começar</p>
+        <h3>Essencial</h3>
+        <p class="plan__price">R$ 990<small>/mês</small></p>
+        <ul><li>5 Reels editados</li><li>Publicação no feed</li><li>Calendário mensal com roteiros de vídeo</li></ul>
+        <a class="btn js-wa" data-plan="Essencial" href="https://wa.me/5511994577549" target="_blank" rel="noopener">Escolher Essencial</a>
+      </article></div>
+      <div class="plan-wrap plan-wrap--lift"><article class="plan plan--blue" data-tilt3d><span class="plan__glare" aria-hidden="true"></span>
+        <p class="plan__tag">Equilíbrio</p>
+        <h3>Crescimento</h3>
+        <p class="plan__price">R$ 2.290<small>/mês</small></p>
+        <ul><li>8 Reels editados</li><li>4 posts ou carrosséis</li><li>Captação parcial inclusa (4h)</li><li>Publicação e organização do feed</li><li>Calendário mensal com roteiros de vídeo</li><li>Relatório mensal</li></ul>
+        <a class="btn js-wa" data-plan="Crescimento" href="https://wa.me/5511994577549" target="_blank" rel="noopener">Escolher Crescimento</a>
+      </article></div>
+      <div class="plan-wrap"><article class="plan plan--green" data-tilt3d><span class="plan__glare" aria-hidden="true"></span>
+        <p class="plan__tag">Melhor valor por peça</p>
+        <h3>Completo</h3>
+        <p class="plan__price">R$ 3.290<small>/mês</small></p>
+        <ul><li>12 Reels editados</li><li>8 posts ou carrosséis</li><li>Captação parcial inclusa (6h)</li><li>Publicação e organização do feed</li><li>Calendário mensal com roteiros de vídeo</li><li>Relatório e reunião mensal</li></ul>
+        <a class="btn js-wa" data-plan="Completo" href="https://wa.me/5511994577549" target="_blank" rel="noopener">Escolher Completo</a>
+      </article></div>
+    </div>
+    <p class="plans__foot">Valores mensais. Captação parcial inclusa no Crescimento e no Completo.</p>
+  </section>
+
+  <!-- 7 · ADICIONAIS: flow, the photo wipes open -->
+  <section class="extras" data-theme="dark" data-sc-act="flow">
+    <h2 class="d" data-sc-in>Serviços <span class="g">adicionais</span></h2>
+    <div class="extras__grid">
+      <article class="xcard xcard--blue" data-sc-in>
+        <div class="xcard__img" data-sc-reveal="left" data-sc-reveal-at="0.12 0.42"><img src="assets/cap.webp" alt="Aluna saltando na caixa em academia iluminada pelo sol" loading="lazy"></div>
+        <div class="xcard__body">
+          <h3>Captação</h3>
+          <p>Para o plano Essencial ou para gravar além do que o plano já inclui. Profissional na academia, com equipamento profissional e roteiro nosso.</p>
+          <div class="xopts">
+            <div><span>4h · até 5 vídeos</span><b>R$ 890</b></div>
+            <div><span>6h · até 8 vídeos</span><b>R$ 1.490</b></div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard xcard--paper" data-sc-in>
+        <div class="xcard__img" data-sc-reveal="right" data-sc-reveal-at="0.16 0.46"><img src="assets/gym2.webp" alt="Alunas treinando na LX Academy com a luz do fim de tarde" loading="lazy"></div>
+        <div class="xcard__body">
+          <h3>Post extra</h3>
+          <p>Arte avulsa ou carrossel adicional para o feed.</p>
+          <p class="xprice">R$ 100 / peça</p>
+        </div>
+      </article>
+    </div>
+    <p class="extras__foot">Captação com equipamento profissional, na região da Granja Viana.</p>
+  </section>
+
+  <!-- 8 · QUEM PRODUZ -->
+  <section class="who" data-theme="light">
+    <div data-sc-in>
+      <p class="eyebrow">Quem produz</p>
+      <h2 class="d">Igor Alves</h2>
+      <p class="who__role">Creative Director</p>
+    </div>
+    <div data-sc-in>
+      <p>Direção, captação e edição dos reels que vão ocupar o feed da LX Academy.</p>
+      <a class="link" href="https://igoralves-portfolio.vercel.app/index.html" target="_blank" rel="noopener">Ver portfólio
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 14L14 6M7 6h7v7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- 9 · PRÓXIMOS PASSOS: last act, holds on green -->
+  <section id="agendar" class="close-act" data-theme="green" data-sc-act="pin" data-sc-span="1.5">
+    <div data-sc-stage class="close-stage">
+      <div class="close__main">
+        <h2 class="d close__title">Próximos<br>passos</h2>
+        <div class="ncard">
+          <p>Vamos <b>marcar uma conversa rápida</b> para alinhar:</p>
+          <ul class="nlist">
+            <li><span class="chk"><i data-sc-cue="0.08" data-sc-rise="0"><svg viewBox="0 0 16 16" fill="none" stroke="#212121" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></span>objetivos da academia</li>
+            <li><span class="chk"><i data-sc-cue="0.24" data-sc-rise="0"><svg viewBox="0 0 16 16" fill="none" stroke="#212121" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></span>modalidades que desejam promover</li>
+            <li><span class="chk"><i data-sc-cue="0.40" data-sc-rise="0"><svg viewBox="0 0 16 16" fill="none" stroke="#212121" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></span>agenda de gravações</li>
+            <li><span class="chk"><i data-sc-cue="0.56" data-sc-rise="0"><svg viewBox="0 0 16 16" fill="none" stroke="#212121" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></i></span>plano ideal para o momento</li>
+          </ul>
+          <p class="ncard__go">A partir disso, iniciamos a produção.</p>
+          <a class="btn js-wa" href="https://wa.me/5511994577549" target="_blank" rel="noopener" data-sc-magnet="0.22">Agendar conversa</a>
+        </div>
+      </div>
+      <footer class="foot">
+        <span class="lx-mark" aria-hidden="true"></span>
+        <span>Proposta comercial · Novembro 2026 · <a href="https://igoralves-portfolio.vercel.app/index.html" target="_blank" rel="noopener">Igor Alves · Creative Director</a></span>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+  ScrollCraft.mount(document.body);
+
+  (function () {
+    const WA = '5511994577549';
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* WhatsApp links with a ready message */
+    document.querySelectorAll('.js-wa').forEach(a => {
+      const plan = a.dataset.plan;
+      const msg = plan
+        ? `Oi Igor! Vi a proposta de gestão de Instagram da LX Academy e quero conversar sobre o plano ${plan}.`
+        : 'Oi Igor! Vi a proposta de gestão de Instagram da LX Academy e quero agendar uma conversa.';
+      a.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    });
+
+    /* Hero title: split into letters, staggered entrance */
+    const h1 = document.querySelector('.h-title');
+    if (h1) {
+      h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
+      let k = 0;
+      h1.querySelectorAll(':scope > span').forEach(line => {
+        line.classList.add('ln');
+        const txt = line.textContent;
+        line.textContent = '';
+        line.setAttribute('aria-hidden', 'true');
+        txt.split(' ').forEach((word, wi, arr) => {
+          const w = document.createElement('span');
+          w.style.whiteSpace = 'nowrap';
+          [...word].forEach(c => {
+            const s = document.createElement('span');
+            s.className = 'ch'; s.textContent = c; s.style.setProperty('--d', 140 + k++ * 26);
+            w.appendChild(s);
+          });
+          line.appendChild(w);
+          if (wi < arr.length - 1) line.appendChild(document.createTextNode(' '));
+        });
+      });
+      h1.classList.add('is-split');
+    }
+
+    /* 3D tilt on the plan cards, same feel as the Jonas site: follows the mouse, shadow moves opposite */
+    if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.querySelectorAll('[data-tilt3d]').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          card.classList.add('inclinando');
+          card.style.setProperty('--ry', (x * 14).toFixed(2) + 'deg');
+          card.style.setProperty('--rx', (-y * 12).toFixed(2) + 'deg');
+          card.style.setProperty('--sx', (-x * 30).toFixed(1) + 'px');
+          card.style.setProperty('--sy', (30 - y * 18).toFixed(1) + 'px');
+          card.style.setProperty('--gx', ((x + 0.5) * 100).toFixed(1) + '%');
+          card.style.setProperty('--gy', ((y + 0.5) * 100).toFixed(1) + '%');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.classList.remove('inclinando');
+          ['--rx', '--ry', '--sx', '--sy'].forEach(p => card.style.removeProperty(p));
+        });
+      });
+    }
+
+    /* Bar inks itself to the section under it */
+    const themed = [...document.querySelectorAll('main > section[data-theme]')];
+    let lastTheme = '';
+    function inkBar() {
+      const y = 34;
+      for (const s of themed) {
+        const r = s.getBoundingClientRect();
+        if (r.top <= y && r.bottom > y) {
+          const t = s.dataset.theme;
+          if (t !== lastTheme) { document.body.dataset.bar = t; lastTheme = t; }
+          return;
+        }
+      }
+    }
+
+    /* Hero reel: play only while visible */
+    const reel = document.querySelector('.js-reel');
+    if (reel) {
+      if (reduce) { reel.removeAttribute('autoplay'); reel.pause(); }
+      else new IntersectionObserver(([e]) => { e.isIntersecting ? reel.play().catch(() => {}) : reel.pause(); }, { threshold: 0.1 }).observe(reel);
+    }
+
+    /* ----- Signature move: the profile fills, plan by plan ----- */
+    const act = document.getElementById('planos');
+    const grid = act.querySelector('.js-grid');
+    const wrap = act.querySelector('.ig__gridwrap');
+    const nEl = act.querySelector('.js-n');
+    const reelsEl = act.querySelector('.js-reels');
+    const empty = act.querySelector('.js-empty');
+    const states = [...act.querySelectorAll('.pstate')];
+    const sel = [...act.querySelectorAll('[data-go]')];
+    const reelIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+    const postIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="7" y="3" width="14" height="14" rx="2"/><path d="M3 7v12a2 2 0 0 0 2 2h12"/></svg>';
+    /* 20 pieces ordered so the running totals match each plan exactly:
+       0-4 = 5 reels (Essencial) · 5-11 = +3 reels +4 posts (Crescimento: 8+4)
+       12-19 = +4 reels +4 posts (Completo: 12+8) */
+    const seq = ['r','r','r','r','r', 'r','p','r','p','r','p','p', 'r','p','r','p','r','p','r','p'];
+    let ri = 0, pi = 0;
+    const tiles = seq.map(t => {
+      const d = document.createElement('div');
+      d.className = 'tile';
+      const src = t === 'r' ? `assets/grid/r${ri++ % 12}.jpg` : `assets/grid/p${[0,3,8,1,4,9,6,2][pi++ % 8]}.webp`;
+      d.innerHTML = `<img src="${src}" alt="" loading="lazy">${t === 'r' ? reelIcon : postIcon}`;
+      grid.appendChild(d);
+      return { el: d, t };
+    });
+    const targets = [5, 12, 20];
+    let shown = -1, stateNow = 0;
+
+    function countFor(p) {
+      // each plan owns a third; tiles fill across the first 55% of it, then hold
+      const s = Math.min(2, Math.floor(p * 3));
+      const local = Math.min(1, Math.max(0, (p * 3 - s) / 0.55));
+      const from = s === 0 ? 0 : targets[s - 1];
+      const n = Math.round(from + (targets[s] - from) * (s === 0 ? Math.min(1, p / 0.14) : local));
+      return { s, n };
+    }
+    function renderFeed(p) {
+      const { s, n } = countFor(p);
+      if (s !== stateNow) {
+        states.forEach((el, i) => el.classList.toggle('is-on', i === s));
+        sel.forEach((b, i) => { b.classList.toggle('is-on', i === s); b.setAttribute('aria-pressed', i === s); });
+        stateNow = s;
+      }
+      if (n === shown) return;
+      tiles.forEach((tile, i) => {
+        const on = i < n;
+        if (on && !tile.el.classList.contains('on') && !reduce) { tile.el.classList.add('new'); setTimeout(() => tile.el.classList.remove('new'), 720); }
+        tile.el.classList.toggle('on', on);
+      });
+      let reels = 0; for (let i = 0; i < n; i++) if (seq[i] === 'r') reels++;
+      nEl.textContent = n; reelsEl.textContent = reels;
+      empty.style.opacity = n ? 0 : '';
+      const rowH = tiles[0].el.offsetHeight + 2;
+      const rows = Math.ceil(n / 3);
+      const shift = Math.max(0, rows * rowH - wrap.clientHeight + 6);
+      grid.style.transform = `translate3d(0, ${-shift}px, 0)`;
+      shown = n;
+    }
+    sel.forEach(b => b.addEventListener('click', () => {
+      const s = +b.dataset.go;
+      const top = act.getBoundingClientRect().top + scrollY;
+      const travel = act.offsetHeight - innerHeight;
+      scrollTo({ top: top + travel * (s / 3 + (s === 0 ? 0.16 : 0.2)), behavior: reduce ? 'auto' : 'smooth' });
+    }));
+
+    let lastP = -1;
+    function tick() {
+      inkBar();
+      const p = parseFloat(act.style.getPropertyValue('--sc-p')) || 0;
+      if (p !== lastP) { renderFeed(p); lastP = p; }
+      requestAnimationFrame(tick);
+    }
+    renderFeed(0);
+    requestAnimationFrame(tick);
+  })();
+</script>
+</body>
+</html>
